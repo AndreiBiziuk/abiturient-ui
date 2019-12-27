@@ -11,12 +11,22 @@ class App extends React.Component {
       page:'home',
       //host:'http://localhost:3000',
       host: 'http://35.228.127.63:3000',
+      token:""
     };
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleTokenChange = this.handleTokenChange.bind(this);
   }
 
   handlePageChange(page){
-    this.setState({page:page});
+    if(this.state.token){
+      this.setState({page:page});
+    }else{
+      this.setState({ page: "login" });
+    }
+  }
+
+  handleTokenChange(token){
+    this.setState({ token: token });
   }
 
   render(){
@@ -28,7 +38,9 @@ class App extends React.Component {
           host={this.state.host} />
         <PageBody
           page={this.state.page}
-          host={this.state.host} >
+          host={this.state.host}
+          handleTokenChange={this.handleTokenChange}
+          handlePageChange={this.handlePageChange} >
         </PageBody>
       </div>
     );

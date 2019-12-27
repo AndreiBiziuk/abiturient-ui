@@ -62,6 +62,11 @@ export default class LoginForm extends React.Component {
         }else{
             this.setState({message:"Успешно!", error:""});
         }
+
+        if(result.access_token){
+            this.props.handleTokenChange(result.access_token);
+            this.props.handlePageChange("home");
+        }
     }
 
     render() {

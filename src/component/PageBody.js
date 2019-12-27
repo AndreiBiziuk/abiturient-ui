@@ -27,6 +27,7 @@ export default class PageBody extends React.Component {
                     <LoginForm
                         handlePageChange={this.props.handlePageChange}
                         host={this.props.host}
+                        handleTokenChange={this.props.handleTokenChange}
                     />
                 );
             }
