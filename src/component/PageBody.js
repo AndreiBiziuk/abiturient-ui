@@ -60,6 +60,7 @@ export default class PageBody extends React.Component {
                     <Users
                         handlePageChange={this.props.handlePageChange}
                         host={this.props.host}
+                        token={this.props.token}
                     />
                 );
             }

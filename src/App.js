@@ -39,6 +39,7 @@ class App extends React.Component {
         <PageBody
           page={this.state.page}
           host={this.state.host}
+          token={this.state.token}
           handleTokenChange={this.handleTokenChange}
           handlePageChange={this.handlePageChange} >
         </PageBody>

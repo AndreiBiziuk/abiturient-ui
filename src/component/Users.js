@@ -1,4 +1,5 @@
 import React from "react";
+import TableFiltered from "./Table";
 
 export default class Users extends React.Component {
     constructor(props) {
@@ -8,9 +9,16 @@ export default class Users extends React.Component {
 
     render() {
         return (
-            <h1>
-                Пользователи
-            </h1>
+            <>
+                <h1>
+                    Пользователи
+                </h1>
+                <TableFiltered 
+                    token={this.props.token}
+                    entity="users"
+                    host={this.props.host}
+                />
+            </>
         )
     }
 }
