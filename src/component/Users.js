@@ -1,10 +1,16 @@
 import React from "react";
-import TableFiltered from "./Table";
+import FilteredTable from "./FilteredTable/FilteredTable";
 
 export default class Users extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
+        this.handleUnauthorized = this.handleUnauthorized.bind(this);
+    }
+
+    handleUnauthorized(){
+        this.props.handleTokenChange("");
+        this.props.handlePageChange("login");
     }
 
     render() {
@@ -13,10 +19,11 @@ export default class Users extends React.Component {
                 <h1>
                     Пользователи
                 </h1>
-                <TableFiltered 
+                <FilteredTable 
                     token={this.props.token}
                     entity="users"
                     host={this.props.host}
+                    handleUnauthorized={this.handleUnauthorized}
                 />
             </>
         )
