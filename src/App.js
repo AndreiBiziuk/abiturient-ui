@@ -9,24 +9,39 @@ class App extends React.Component {
     this.props = props;
     this.state = {
       page:'home',
-      //host:'http://localhost:3000',
-      host: 'http://35.228.127.63:3000',
+      host:'http://localhost:3000',
+      //host: 'http://35.228.127.63:3000',
       token:""
     };
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleTokenChange = this.handleTokenChange.bind(this);
+    this.saveToStorage = this.saveToStorage.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadFromStorage();
+  }
+
+  loadFromStorage(){
+    if(localStorage.getItem("appState")){
+      this.setState(JSON.parse(localStorage.getItem("appState")));
+    }
+  }
+
+  saveToStorage(){
+    localStorage.setItem("appState", JSON.stringify(this.state));
   }
 
   handlePageChange(page){
     if(this.state.token){
-      this.setState({page:page});
+      this.setState({page:page}, this.saveToStorage);
     }else{
-      this.setState({ page: "login" });
+      this.setState({ page: "login" }, this.saveToStorage);
     }
   }
 
   handleTokenChange(token){
-    this.setState({ token: token });
+    this.setState({ token: token }, this.saveToStorage);
   }
 
   render(){
