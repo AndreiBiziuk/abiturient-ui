@@ -5,7 +5,6 @@ export default class Paginate extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = { currentpage:props.currentpage };
 
         this.handleCurrentPageChange = this.handleCurrentPageChange.bind(this);
     }
@@ -14,7 +13,6 @@ export default class Paginate extends React.Component {
         let page = event.currentTarget.dataset.index;
         //console.log(key);
         if(page >= 0 && page < this.props.pagecount){
-            this.setState({currentpage:page});
             this.props.handleTablePageChange(page);
         }
     }
@@ -22,7 +20,7 @@ export default class Paginate extends React.Component {
     render(){
         let pagecount = this.props.pagecount ? this.props.pagecount * 1 : 0;
         let maxpages = this.props.maxpages ? this.props.maxpages * 1 : 10;
-        let currentpage = this.state.currentpage * 1;
+        let currentpage = this.props.currentpage * 1;
 
         let right =  currentpage + Math.ceil(maxpages / 2) - 1;
         let left = currentpage - Math.floor(maxpages / 2);
