@@ -8,12 +8,13 @@ export default class FilteredTable extends React.Component {
   constructor(props){
     super(props);
     this.props = props;
-    this.state = {sort:1, filter:"", page:0, pagecount:1, pagesize:10, data:[], fields:[], currentFilter:0};
+    this.state = {sort:"0", filter:"", page:0, pagecount:1, pagesize:10, data:[], fields:[], currentFilter:0};
     this.loadData = this.loadData.bind(this);
     this.getPageCount = this.getPageCount.bind(this);
     this.getFields = this.getFields.bind(this);
     this.handleTablePageChange = this.handleTablePageChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleSortChange = this.handleSortChange.bind(this);
 
     this.getFields();
     this.loadData();
@@ -33,8 +34,9 @@ export default class FilteredTable extends React.Component {
     })
 
     let result = await response.json();
+    const pagecount = Math.ceil(result.linescount / this.state.pagesize);
 
-    this.setState({ pagecount: Math.ceil(result.linescount / this.state.pagesize) });
+    this.setState({ pagecount: pagecount, page: this.state.page >= pagecount ? pagecount - 1 : this.state.page });
   }
 
   async getFields(){
@@ -79,9 +81,26 @@ export default class FilteredTable extends React.Component {
     this.setState({page:page}, this.loadData);
   }
 
+  handleSortChange(field, sort){
+    let srt = this.state.sort.split(",")
+      .filter(s => Math.abs(s) !== field);
+
+    srt.push(field * sort);
+
+    srt = srt.filter(s => s*1 !== 0);
+
+    if(!srt.length){
+      srt.push(0);
+    }
+
+    this.setState({ sort: srt.join(',') }, this.loadData);
+
+    //console.log(field, " ", sort, " ", srt);
+  }
+
   handleFilterChange(event){
     let key = event.currentTarget.dataset.index;
-    let value = event.currentTarget.value;
+    let value = btoa(encodeURIComponent(event.currentTarget.value));
     let found = false;
 
     //console.log(this.state.filter.split(';'));
@@ -104,11 +123,13 @@ export default class FilteredTable extends React.Component {
 
     return(
       <Container>
-        <Table striped bordered hover size="sm">
+        <Table striped bordered responsive hover size="sm">
           <TableHeader
             fields={this.state.fields}
             handleFilterChange={this.handleFilterChange}
+            handleSortChange={this.handleSortChange}
             filter={this.state.filter}
+            sort={this.state.sort}
             currentFilter={this.state.currentFilter}
           />
           <tbody>
