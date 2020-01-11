@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Overlay from 'react-bootstrap/Overlay'
 import Popover from 'react-bootstrap/Popover'
@@ -27,6 +28,7 @@ export default class OptionsPopover extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleHide = this.handleHide.bind(this);
+        this.handleClear = this.handleClear.bind(this);
 
         this.ref = React.createRef();
         this.filterInput = React.createRef();
@@ -54,27 +56,55 @@ export default class OptionsPopover extends React.Component {
         this.setShow(false);
     }
 
+    handleClear(event){
+
+        function setNativeValue(element, value) {
+            const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+            const prototype = Object.getPrototypeOf(element);
+            const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+
+            if (valueSetter && valueSetter !== prototypeValueSetter) {
+                prototypeValueSetter.call(element, value);
+            } else {
+                valueSetter.call(element, value);
+            }
+        }
+
+        setNativeValue(this.filterInput.current,"");
+        this.filterInput.current.dispatchEvent(new Event('input', { 'bubbles': true }));
+    }
+
     render() {
         const popover = (
             <UpdatingPopover id="popover-basic">
                 <Popover.Title as="h3">Фильтр и сортировка</Popover.Title>
                 <Popover.Content>
-                    <Form.Control 
-                        ref={this.filterInput} 
-                        size="sm" 
-                        type="text" 
-                        placeholder="Фильтр" 
-                        data-index={this.props.num} 
-                        onChange={this.props.handleFilterChange} 
-                        value={this.props.filter}
-                    />
+                    <InputGroup>
+                        <Form.Control
+                            ref={this.filterInput}
+                            size="sm"
+                            type="text"
+                            placeholder="Фильтр"
+                            data-index={this.props.num}
+                            onChange={this.props.handleFilterChange}
+                            value={this.props.filter}
+                        />
+                        <InputGroup.Append>
+                            <Button variant="outline-danger" size="lg" style={{ minWidth: "2rem", padding: "0px" }} onClick={this.handleClear}>⛌</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    <InputGroup className="mt-2">
+                        <Button variant="outline-primary" className="mr-1" style={{ minWidth: "2rem", padding: "0px" }} size="lg" active={this.props.sort === 1} title="По возрастанию" onClick={() => this.props.handleSortChange(this.props.num, 1)}>⤋</Button>
+                        <Button variant="outline-primary" className="mr-1" style={{ minWidth: "2rem", padding: "0px" }} size="lg" active={this.props.sort === -1} title="По убыванию" onClick={() => this.props.handleSortChange(this.props.num, -1)}>⤊</Button>
+                        <Button variant="outline-primary" className="mr-1" style={{ minWidth: "2rem", padding: "0px" }} size="lg" active={this.props.sort === 0} title="Без сортировки" onClick={() => this.props.handleSortChange(this.props.num, 0)}>⇋</Button>
+                    </InputGroup>
                 </Popover.Content>
             </UpdatingPopover>
         );
 
         return (
             <>
-                <Button ref={this.ref} variant="light" size="sm" onClick={this.handleClick}>...</Button>
+                <Button ref={this.ref} title="Фильтр и сортировка" variant="light" size="sm" onClick={this.handleClick}>🔧</Button>
                 <Overlay
                     show={this.state.show}
                     target={this.state.target}
