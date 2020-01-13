@@ -123,35 +123,37 @@ export default class FilteredTable extends React.Component {
 
     return(
       <Container>
-        <Table striped bordered responsive hover size="sm">
-          <TableHeader
-            fields={this.state.fields}
-            handleFilterChange={this.handleFilterChange}
-            handleSortChange={this.handleSortChange}
-            filter={this.state.filter}
-            sort={this.state.sort}
-            currentFilter={this.state.currentFilter}
-          />
-          <tbody>
-            {
-              this.state.data.map(
-                (row, i)=>{
-                  return (
-                  <tr key={i}>
-                    {
-                        this.state.fields.map(
-                        (name,i)=>{
-                          return <td key={i}>{row[name]}</td>
-                        }
-                      )
-                    }
-                  </tr>
-                  )
-                }
-              )
-            }
-          </tbody>
-        </Table>
+        <Container>
+          <Table striped bordered responsive hover size="sm">
+            <TableHeader
+              fields={this.state.fields}
+              handleFilterChange={this.handleFilterChange}
+              handleSortChange={this.handleSortChange}
+              filter={this.state.filter}
+              sort={this.state.sort}
+              currentFilter={this.state.currentFilter}
+            />
+            <tbody>
+              {
+                this.state.data.map(
+                  (row, i)=>{
+                    return (
+                    <tr key={i}>
+                      {
+                          this.state.fields.map(
+                          (name,i)=>{
+                            return <td key={i}>{row[name]}</td>
+                          }
+                        )
+                      }
+                    </tr>
+                    )
+                  }
+                )
+              }
+            </tbody>
+          </Table>
+        </Container>
         <Container>
           <Paginate 
             pagecount={this.state.pagecount}

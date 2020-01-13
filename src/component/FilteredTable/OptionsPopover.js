@@ -104,16 +104,17 @@ export default class OptionsPopover extends React.Component {
 
         return (
             <>
-                <Button ref={this.ref} title="Фильтр и сортировка" variant="light" size="sm" onClick={this.handleClick}>🔧</Button>
+                <Button ref={this.ref} title="Фильтр и сортировка" variant="light" size="sm" active={this.props.filter || this.props.sort} onClick={this.handleClick}>🔧</Button>
                 <Overlay
                     show={this.state.show}
                     target={this.state.target}
                     placement="bottom"
                     rootClose={true}
                     //container={this.ref.current}
-                    onEntered={this.handleShow}
+                    onEntering={this.handleShow}
                     onHide={this.handleHide}
-                >
+                    popperConfig={{modifiers : { preventOverflow: {enabled: false } }}}
+            >
                     {popover}
                 </Overlay>
             </>
