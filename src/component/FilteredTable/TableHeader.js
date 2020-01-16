@@ -24,6 +24,7 @@ export default class TableHeader extends React.Component {
      return (
             <thead>
                 <tr>
+                    <th key={0}></th>
                     {
                         this.props.fields.map((name, i) => {
                             return (

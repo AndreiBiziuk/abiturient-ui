@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container"
 import Table from "react-bootstrap/Table"
 import Paginate from "./Pagination"
 import TableHeader from "./TableHeader"
+import TableBody from "./TableBody"
 
 export default class FilteredTable extends React.Component {
   constructor(props){
@@ -133,25 +134,11 @@ export default class FilteredTable extends React.Component {
               sort={this.state.sort}
               currentFilter={this.state.currentFilter}
             />
-            <tbody>
-              {
-                this.state.data.map(
-                  (row, i)=>{
-                    return (
-                    <tr key={i}>
-                      {
-                          this.state.fields.map(
-                          (name,i)=>{
-                            return <td key={i}>{row[name]}</td>
-                          }
-                        )
-                      }
-                    </tr>
-                    )
-                  }
-                )
-              }
-            </tbody>
+          <TableBody 
+            data={this.state.data}
+            fields={this.state.fields}
+            handleEditIdChange={this.props.handleEditIdChange}
+          />
           </Table>
         </Container>
         <Container>

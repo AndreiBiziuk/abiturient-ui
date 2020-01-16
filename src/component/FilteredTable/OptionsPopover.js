@@ -90,7 +90,7 @@ export default class OptionsPopover extends React.Component {
                             value={this.props.filter}
                         />
                         <InputGroup.Append>
-                            <Button variant="outline-danger" size="lg" style={{ minWidth: "2rem", padding: "0px" }} onClick={this.handleClear}>⛌</Button>
+                            <Button variant="outline-danger" style={{ minWidth: "2rem", padding: "0px" }} onClick={this.handleClear}>✘</Button>
                         </InputGroup.Append>
                     </InputGroup>
                     <InputGroup className="mt-2">

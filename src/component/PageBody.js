@@ -36,6 +36,7 @@ export default class PageBody extends React.Component {
                     <AbitursList
                         handlePageChange={this.props.handlePageChange}
                         handleTokenChange={this.props.handleTokenChange}
+                        handleEditIdChange={this.props.handleEditIdChange}
                         host={this.props.host}
                         token={this.props.token}
                     />

@@ -9,13 +9,14 @@ class App extends React.Component {
     this.props = props;
     this.state = {
       page:'home',
-      host:'http://localhost:3000',
-      //host: 'http://35.228.127.63:3000',
+      //host:'http://localhost:3000',
+      host: 'http://35.228.127.63:3000',
       token:""
     };
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleTokenChange = this.handleTokenChange.bind(this);
     this.saveToStorage = this.saveToStorage.bind(this);
+    this.handleEditIdChange = this.handleEditIdChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +31,10 @@ class App extends React.Component {
 
   saveToStorage(){
     localStorage.setItem("appState", JSON.stringify(this.state));
+  }
+
+  handleEditIdChange(id){
+    this.setState({ editId: id }, this.saveToStorage);
   }
 
   handlePageChange(page){
@@ -56,7 +61,9 @@ class App extends React.Component {
           host={this.state.host}
           token={this.state.token}
           handleTokenChange={this.handleTokenChange}
-          handlePageChange={this.handlePageChange} >
+          handleEditIdChange={this.handleEditIdChange}
+          handlePageChange={this.handlePageChange}
+        >
         </PageBody>
       </div>
     );

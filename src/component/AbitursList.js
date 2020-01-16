@@ -24,6 +24,7 @@ export default class AbiturList extends React.Component {
                     entity="abiturs"
                     host={this.props.host}
                     handleUnauthorized={this.handleUnauthorized}
+                    handleEditIdChange={this.props.handleEditIdChange}
                 />
             </>
         )
