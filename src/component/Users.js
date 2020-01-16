@@ -20,10 +20,9 @@ export default class Users extends React.Component {
                     Пользователи
                 </h1>
                 <FilteredTable 
-                    token={this.props.token}
                     entity="users"
-                    host={this.props.host}
                     handleUnauthorized={this.handleUnauthorized}
+                    {...this.props}
                 />
             </>
         )

@@ -137,7 +137,7 @@ export default class FilteredTable extends React.Component {
           <TableBody 
             data={this.state.data}
             fields={this.state.fields}
-            handleEditIdChange={this.props.handleEditIdChange}
+            {...this.props}
           />
           </Table>
         </Container>

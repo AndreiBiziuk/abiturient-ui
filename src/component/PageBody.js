@@ -17,62 +17,49 @@ export default class PageBody extends React.Component {
             case 'home':{
                 return (
                     <Home 
-                        handlePageChange={this.props.handlePageChange}
-                        host={this.props.host}
+                        {...this.props}
                     />
                 );
             }
             case 'login': {
                 return (
                     <LoginForm
-                        handlePageChange={this.props.handlePageChange}
-                        host={this.props.host}
-                        handleTokenChange={this.props.handleTokenChange}
+                        {...this.props}
                     />
                 );
             }
             case 'abiturs': {
                 return (
                     <AbitursList
-                        handlePageChange={this.props.handlePageChange}
-                        handleTokenChange={this.props.handleTokenChange}
-                        handleEditIdChange={this.props.handleEditIdChange}
-                        host={this.props.host}
-                        token={this.props.token}
+                        {...this.props}
                     />
                 );
             }
             case 'groups': {
                 return (
                     <Groups
-                        handlePageChange={this.props.handlePageChange}
-                        host={this.props.host}
+                        {...this.props}
                     />
                 );
             }
             case 'specs': {
                 return (
                     <Specialities
-                        handlePageChange={this.props.handlePageChange}
-                        host={this.props.host}
+                        {...this.props}
                     />
                 );
             }
             case 'users': {
                 return (
                     <Users
-                        handlePageChange={this.props.handlePageChange}
-                        handleTokenChange={this.props.handleTokenChange}
-                        host={this.props.host}
-                        token={this.props.token}
+                        {...this.props}
                     />
                 );
             }
             default:{
                 return (
                     <Home
-                        handlePageChange={this.props.handlePageChange}
-                        host={this.props.host}
+                        {...this.props}
                     />
                 );
             }
