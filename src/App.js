@@ -17,6 +17,7 @@ class App extends React.Component {
     this.handleTokenChange = this.handleTokenChange.bind(this);
     this.saveToStorage = this.saveToStorage.bind(this);
     this.handleEditIdChange = this.handleEditIdChange.bind(this);
+    this.handleCurrentEntityChange = this.handleCurrentEntityChange.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,10 @@ class App extends React.Component {
 
   handleEditIdChange(id){
     this.setState({ editId: id }, this.saveToStorage);
+  }
+
+  handleCurrentEntityChange(entity){
+    this.setState({ currentEntity: entity }, this.saveToStorage);
   }
 
   handlePageChange(page){
@@ -63,6 +68,7 @@ class App extends React.Component {
           handleTokenChange={this.handleTokenChange}
           handleEditIdChange={this.handleEditIdChange}
           handlePageChange={this.handlePageChange}
+          handleCurrentEntityChange={this.handleCurrentEntityChange}
         >
         </PageBody>
       </div>
