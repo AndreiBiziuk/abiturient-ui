@@ -5,6 +5,7 @@ import AbitursList from "./AbitursList";
 import Groups from "./Groups";
 import Users from "./Users";
 import Specialities from "./Specialities";
+import EditGeneric from "./EditGeneric";
 
 export default class PageBody extends React.Component {
     constructor(props) {
@@ -52,6 +53,13 @@ export default class PageBody extends React.Component {
             case 'users': {
                 return (
                     <Users
+                        {...this.props}
+                    />
+                );
+            }
+            case 'editGeneric':{
+                return(
+                    <EditGeneric 
                         {...this.props}
                     />
                 );
