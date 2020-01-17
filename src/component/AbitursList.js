@@ -21,6 +21,7 @@ export default class AbiturList extends React.Component {
                 </h1>
                 <FilteredTable
                     entity="abiturs"
+                    editEntity="abitursFull"
                     handleUnauthorized={this.handleUnauthorized}
                     {...this.props}
                 />

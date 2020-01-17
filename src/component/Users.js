@@ -21,6 +21,7 @@ export default class Users extends React.Component {
                 </h1>
                 <FilteredTable 
                     entity="users"
+                    editEntity="users"
                     handleUnauthorized={this.handleUnauthorized}
                     {...this.props}
                 />

@@ -17,7 +17,8 @@ export default class TableBody extends React.Component {
         const rowNum = event.currentTarget.dataset.index;
         const id = this.props.data[rowNum][this.props.fields[0]];
         this.props.handleEditIdChange(id);
-        this.props.handleCurrentEntityChange(this.props.entity)
+        this.props.handleCurrentEditEntityChange(this.props.editEntity)
+        this.props.handlePageChange("editGeneric");
         //console.log(id);
     }
 
@@ -25,7 +26,7 @@ export default class TableBody extends React.Component {
         const rowNum = event.currentTarget.dataset.index;
         const id = this.props.data[rowNum][this.props.fields[0]];
         this.props.handleEditIdChange(id);
-        this.props.handleCurrentEntityChange(this.props.entity)
+        this.props.handleCurrentEditEntityChange(this.props.editEntity)
         //console.log(id);
     }
 

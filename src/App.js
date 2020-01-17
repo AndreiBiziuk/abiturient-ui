@@ -17,7 +17,7 @@ class App extends React.Component {
     this.handleTokenChange = this.handleTokenChange.bind(this);
     this.saveToStorage = this.saveToStorage.bind(this);
     this.handleEditIdChange = this.handleEditIdChange.bind(this);
-    this.handleCurrentEntityChange = this.handleCurrentEntityChange.bind(this);
+    this.handleCurrentEditEntityChange = this.handleCurrentEditEntityChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,13 +38,13 @@ class App extends React.Component {
     this.setState({ editId: id }, this.saveToStorage);
   }
 
-  handleCurrentEntityChange(entity){
-    this.setState({ currentEntity: entity }, this.saveToStorage);
+  handleCurrentEditEntityChange(entity){
+    this.setState({ currentEditEntity: entity }, this.saveToStorage);
   }
 
   handlePageChange(page){
     if(this.state.token){
-      this.setState({page:page}, this.saveToStorage);
+      this.setState({prevPage:this.state.page, page:page}, this.saveToStorage);
     }else{
       this.setState({ page: "login" }, this.saveToStorage);
     }
@@ -59,16 +59,20 @@ class App extends React.Component {
       <div className="App">
         <MainMenu 
           page={this.state.page}
+          prevPage={this.state.prevPage}
           handlePageChange={this.handlePageChange}
           host={this.state.host} />
         <PageBody
           page={this.state.page}
+          prevPage={this.state.prevPage}
           host={this.state.host}
           token={this.state.token}
+          editId={this.state.editId}
+          currentEditEntity={this.state.currentEditEntity}
           handleTokenChange={this.handleTokenChange}
           handleEditIdChange={this.handleEditIdChange}
           handlePageChange={this.handlePageChange}
-          handleCurrentEntityChange={this.handleCurrentEntityChange}
+          handleCurrentEditEntityChange={this.handleCurrentEditEntityChange}
         >
         </PageBody>
       </div>
