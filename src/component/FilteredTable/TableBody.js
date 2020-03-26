@@ -18,7 +18,7 @@ export default class TableBody extends React.Component {
         const id = this.props.data[rowNum][this.props.fields[0]];
         this.props.handleEditIdChange(id);
         this.props.handleCurrentEditEntityChange(this.props.editEntity)
-        this.props.handlePageChange("editGeneric");
+        this.props.handlePageChange(this.props.editPage);
         //console.log(id);
     }
 

@@ -24,6 +24,7 @@ export default class Users extends React.Component {
                     editEntity="users"
                     handleUnauthorized={this.handleUnauthorized}
                     {...this.props}
+                    editPage="editGeneric"
                 />
             </>
         )
